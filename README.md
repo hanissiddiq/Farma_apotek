@@ -1,3 +1,71 @@
+# 💊 Apotek Online
+
+Aplikasi **Apotek Online** adalah sistem manajemen penjualan obat dan administrasi apotek berbasis web. Dibangun menggunakan Laravel 11 php 8.2.8, Tailwind CSS, dan Laravel Breeze dengan dukungan role-based access control menggunakan package **Spatie Laravel Permission**.
+
+---
+
+## 🚀 Fitur Utama
+
+- 🔐 Autentikasi Login & Register (Laravel Breeze)
+- 🧑‍⚕️ Manajemen User dengan Hak Akses (Admin, Apoteker, Kasir, Penjual, Pembeli, dll)
+- 💊 Manajemen Data Obat (CRUD)
+- 🛒 Transaksi Penjualan Obat
+- 📦 Stok dan Persediaan Obat
+- 📄 Riwayat Transaksi
+- 📊 Dashboard Admin
+- 🔍 Pencarian Obat
+- 🎨 UI responsif dengan Tailwind CSS
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- **Laravel 11**
+- **Tailwind CSS**
+- **Laravel Breeze** (Autentikasi)
+- **Spatie Laravel Permission** (Role & Permission)
+- **MySQL** (Database)
+- **Alpine.js** (Interaktivitas UI)
+
+---
+
+## ⚙️ Instalasi
+
+Ikuti langkah-langkah berikut untuk menjalankan proyek secara lokal:
+
+```bash
+git clone https://github.com/hanissiddiq/apotek-online.git
+cd apotek-online
+
+# Install dependency PHP
+composer install
+
+# Copy file environment
+cp .env-asli .env
+
+# Generate key
+php artisan key:generate
+
+# Install dependency JS & CSS
+npm install && npm run dev
+
+#Buatkan Database di phpmyadmin
+Buat database dengan nama "db_farma_apotek"
+
+# Buat dan jalankan migrasi database
+php artisan migrate
+
+# Jalankan seeder (opsional)
+php artisan db:seed
+
+# Jalankan server
+php artisan serve
+
+# Account Owner
+email : hanissiddiq10@gmail.com
+Password : password
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
