@@ -79,7 +79,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -87,7 +87,36 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'icon' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            if($request->hasFile('icon')){
+
+                $iconPath = $request->file('icon')->store('category_icons', 'public');
+                $validated['icon'] = $iconPath;
+            }
+            $validated['slug'] = Str::slug($request->name);
+            //obat lambung => obat-lambung
+            $category->update($validated);
+
+            //ketika berhasil simpan
+            DB::commit();
+
+            return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
+        } catch (\Exception $e) {
+            //ketika gagal simpan
+            DB::rollBack();
+            $error = ValidationException::withMessages([
+                'system_error' => ['System Error!',$e->getMessage()],
+            ]);
+            throw $error;
+            // return redirect()->back()->with('error', 'Failed to create category.');
+        }
     }
 
     /**
@@ -95,6 +124,19 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            // Hapus file ikon jika ada
+
+
+            $category->delete();
+
+            return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
+        } catch (\Exception $e) {
+           DB::rollBack();
+            $error = ValidationException::withMessages([
+                'system_error' => ['System Error!',$e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 }

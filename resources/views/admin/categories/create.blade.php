@@ -32,9 +32,9 @@
 
                     <!-- Email Address -->
                     <div class="mt-4">
-                        <x-input-label for="icon" />
+                        <x-input-label for="icon" :value="__('Icon')" />
                         <x-text-input id="icon" class="block mt-1 w-full" type="file" name="icon"
-                             required autocomplete="username" />
+                             required autocomplete="icon" />
                         <x-input-error :messages="$errors->get('icon')" class="mt-2" />
                     </div>
 

@@ -20,7 +20,7 @@
                     </h3>
                     <div class="flex flex-row items-center gap-x-2">
 
-                        <a href="#" class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">Edit</a>
+                        <a href="{{ route('admin.categories.edit', $category) }}" class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">Edit</a>
                         <form method="POST" action="{{ route('admin.categories.destroy', $category) }}">
                             @csrf
                             @method('DELETE')
