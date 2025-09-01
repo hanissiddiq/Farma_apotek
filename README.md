@@ -34,8 +34,8 @@ Aplikasi **Apotek Online** adalah sistem manajemen penjualan obat dan administra
 Ikuti langkah-langkah berikut untuk menjalankan proyek secara lokal:
 
 ```bash
-git clone https://github.com/hanissiddiq/apotek-online.git
-cd apotek-online
+git clone https://github.com/hanissiddiq/Farma_apotek.git
+cd Farma
 
 # Install dependency PHP
 composer install

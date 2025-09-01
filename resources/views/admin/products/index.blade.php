@@ -28,10 +28,10 @@
                     <div class="flex flex-row items-center gap-x-2">
 
                         <a href="{{ route('admin.products.edit', $product) }}" class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">Edit</a>
-                        <form method="POST" action="{{ route('admin.products.destroy', $product) }}">
+                        <form method="POST" id="delete-form-{{ $product->id }}" action="{{ route('admin.products.destroy', $product) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="px-5 py-3 rounded-full text-white bg-red-500 hover:bg-red-600">Delete</button>
+                            <button type="button" class="px-5 py-3 rounded-full text-white bg-red-500 hover:bg-red-600" onclick="confirmDelete({{ $product->id }})">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -46,4 +46,23 @@
             </div>
         </div>
     </div>
+
+<script>
+function confirmDelete(id) {
+    Swal.fire({
+        title: 'Apakah kamu yakin?',
+        text: "Produk akan dihapus permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, hapus!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('delete-form-' + id).submit();
+        }
+    })
+}
+</script>
+
 </x-app-layout>
