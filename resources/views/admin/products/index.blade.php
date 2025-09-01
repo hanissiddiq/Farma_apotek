@@ -24,6 +24,7 @@
 
                     </div>
                     </div>
+                    <p class="text-base text-slate-500">{{ $product->category->name }}</p>
                     <div class="flex flex-row items-center gap-x-2">
 
                         <a href="{{ route('admin.products.edit', $product) }}" class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">Edit</a>
@@ -36,6 +37,9 @@
                 </div>
 
                 @empty
+                <p class="text-white">
+                    Belum ada produk yang ditambahkan oleh pemilik apotik.
+                </p>
 
                 @endforelse
 

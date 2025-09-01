@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category')->orderBy('id', 'DESC')->get();
         return view('admin.products.index', [ 'products' => $products ]);
     }
 
@@ -84,7 +85,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('admin.products.edit', [
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -92,7 +97,39 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+         $validated = $request->validate([
+            'name' => 'required|string',
+            'about' => 'required|string',
+            'category_id' => 'required|integer',
+            'price' => 'required|integer',
+            'photo' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            if($request->hasFile('photo')){
+
+                $photoPath = $request->file('photo')->store('product_photos', 'public');
+                $validated['photo'] = $photoPath;
+            }
+            $validated['slug'] = Str::slug($request->name);
+            $product->update($validated);
+            // $newProduct = Product::update($validated);
+
+            //ketika berhasil simpan
+            DB::commit();
+
+            return redirect()->route('admin.products.index')->with('success', 'Product update successfully.');
+        } catch (\Exception $e) {
+            //ketika gagal simpan
+            DB::rollBack();
+            $error = ValidationException::withMessages([
+                'system_error' => ['System Error!',$e->getMessage()],
+            ]);
+            throw $error;
+            // return redirect()->back()->with('error', 'Failed to create category.');
+        }
     }
 
     /**
@@ -100,6 +137,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+         try {
+            $product->delete();
+
+            return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
+        } catch (\Exception $e) {
+           DB::rollBack();
+            $error = ValidationException::withMessages([
+                'system_error' => ['System Error!',$e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 }
