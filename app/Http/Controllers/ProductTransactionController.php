@@ -12,7 +12,9 @@ class ProductTransactionController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.product_transactions.index', [
+            'transactions' => ProductTransaction::with('user', 'product')->latest()->paginate(10)
+        ]);
     }
 
     /**

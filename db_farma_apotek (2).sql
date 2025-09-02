@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 01, 2025 at 02:33 AM
+-- Generation Time: Sep 02, 2025 at 01:47 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.28
 
@@ -32,14 +32,6 @@ CREATE TABLE `cache` (
   `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('admin@elaundry.com|127.0.0.1', 'i:1;', 1756357144),
-('admin@elaundry.com|127.0.0.1:timer', 'i:1756357144;', 1756357144);
 
 -- --------------------------------------------------------
 
@@ -87,10 +79,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `slug`, `icon`, `created_at`, `updated_at`) VALUES
-(4, 'Diabetes', 'diabetes', 'category_icons/o6WuPydRsXtnIuwuprvdbNdxN7LJ8gCwlVwD14UV.svg', '2025-08-27 23:59:10', '2025-08-27 23:59:10'),
-(5, 'Fitness', 'fitness', 'category_icons/QSc9oMKkS3kkcLkRPmd7YeCbWHEy9wQW4r42BIxp.svg', '2025-08-27 23:59:39', '2025-08-28 00:55:42'),
-(6, 'Vitamins', 'vitamins', 'category_icons/9WwPCuECV18AiOI9xA4iKSsD2kUqjhv1nnPbEVBt.svg', '2025-08-28 00:00:24', '2025-08-28 00:00:24'),
-(8, 'Surgicals', 'surgicals', 'category_icons/HzY5R6nlEnViJlEx8B2VDNvlpFPcuAizqLhxvUVv.svg', '2025-08-28 00:37:28', '2025-08-28 00:37:28');
+(1, 'Vitamins', 'vitamins', 'category_icons/SMgIYsLrGn5wnWNUrooo5SLvZSwRed9zlA8rhKvf.svg', '2025-08-31 20:45:33', '2025-08-31 20:55:06'),
+(3, 'Diabetes', 'diabetes', 'category_icons/lbV5AEHfZabqXRAInBvXz4RrC61EKKyIjKkanWuC.svg', '2025-08-31 20:46:20', '2025-08-31 20:46:20'),
+(4, 'Fitness', 'fitness', 'category_icons/sUYFqn8Mb0m593ZqqDfRv1DKJxTq528wUQdk2Zfl.svg', '2025-08-31 20:46:38', '2025-08-31 20:46:38');
 
 -- --------------------------------------------------------
 
@@ -200,7 +191,7 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 4);
+(2, 'App\\Models\\User', 2);
 
 -- --------------------------------------------------------
 
@@ -251,9 +242,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `slug`, `photo`, `price`, `about`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'Paracetamol', 'paracetamol', 'product_photos/7A5SD244XUmGKm4HquFBhs8RqNtj3nNm5ouIDBOb.jpg', 38000, 'Obat penurun panas', 6, '2025-08-31 19:14:36', '2025-08-31 19:14:36'),
-(2, 'Mylanta', 'mylanta', 'product_photos/bH8d4lQRZ5umH8BgGB4xqN58PSOCDuCihX07aECk.png', 25000, 'Mylanta adalah obat lambung yang mengandung kalsium atau kapur yang berfungsi untuk meredakan asam lambung naik', 6, '2025-08-31 19:20:21', '2025-08-31 19:20:21'),
-(3, 'Combatrin', 'combatrin', 'product_photos/rafJ6O5NB8riuSAv5KHgDa3vX2vby30XjMDtOYmU.jpg', 42000, 'Combatrin adalah obat cacing yang diperuntukkan untuk dewasa dan anak', 6, '2025-08-31 19:21:31', '2025-08-31 19:21:31');
+(3, 'Panadol', 'panadol', 'product_photos/fjVRC5AjENVaQ4Nbbqw8OJkb3QACpcYIsty0ZQOJ.jpg', 56000, 'Panadol adalah obat pereda nyeri dikepala', 1, '2025-08-31 20:58:48', '2025-08-31 20:58:48'),
+(4, 'Combatrin', 'combatrin', 'product_photos/9FC8iPUU2F8Y5vngeEzGu005SkHu7k24mgisB8KQ.jpg', 78000, 'Combatrin adalah obat cacing yang diperuntukkan untuk anak - anak dan dewasa', 1, '2025-08-31 20:59:39', '2025-08-31 20:59:39'),
+(5, 'Cooling 5', 'cooling-5', 'product_photos/HuExDow53EzO843MsWhNFDKWdvQT8NtmCfyythnK.jpg', 128000, 'Cooling 5 adalah obat pereda nyeri di gusi', 1, '2025-08-31 21:00:33', '2025-08-31 21:00:33'),
+(6, 'Mylanta', 'mylanta', 'product_photos/FCnnzWmE020t5Yfj1wRx2nhoJN5RIhVsujNUIUEU.png', 125000, 'Mylanta adalah obat yang mengandung kapur dan kalsium yang berfungsi untuk meredakan asam lambung', 3, '2025-08-31 21:01:51', '2025-08-31 21:30:40');
 
 -- --------------------------------------------------------
 
@@ -295,8 +287,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'owner', 'web', '2025-08-05 21:14:44', '2025-08-05 21:14:44'),
-(2, 'buyer', 'web', '2025-08-05 21:14:44', '2025-08-05 21:14:44');
+(1, 'owner', 'web', '2025-08-31 20:29:49', '2025-08-31 20:29:49'),
+(2, 'buyer', 'web', '2025-08-31 20:29:49', '2025-08-31 20:29:49');
 
 -- --------------------------------------------------------
 
@@ -329,7 +321,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('XxEAJ0hPFYJmW7NeBz8hyKnzXR3nV07gimTCq91e', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMDltYjZ5bkRIUmhPNkdWejVsQnBKUzV4a2J2d0dKSXVmY3hyU3FYTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9wcm9kdWN0cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1756693812);
+('YWiwFc1fCm5FCNdTYUNp1Znxrk6dUiMQ9ztBkUle', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQWY3dU9SdHJyb1htRGxpcjdSU0FrN0I5dFpKblJnZkFMM0hMeDFVMSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO319', 1756777562);
 
 -- --------------------------------------------------------
 
@@ -368,8 +360,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'hanis', 'hanissiddiq10@gmail.com', NULL, '$2y$12$fVd5Y.S705n193x94zIZReL7qXl4jhlU3QcmRJ68gvK22GS.QzVYy', NULL, '2025-08-05 21:14:45', '2025-08-05 21:14:45'),
-(4, 'Nurhaliza', 'liza@pembeli.com', NULL, '$2y$12$0TuV6w2nw.EpG9BLBIHtb.6WISt1oKn6j3UnpsWPpU2d9PORcJnSS', NULL, '2025-08-06 01:25:43', '2025-08-06 01:25:43');
+(1, 'Hanis', 'hanissiddiq10@gmail.com', NULL, '$2y$12$dzp/hLWpus4tlL2qZE5Wx.9l8gPsI2CzqLf7pzjYC9S8upd7JkSrS', NULL, '2025-08-31 20:29:50', '2025-08-31 20:29:50'),
+(2, 'Nurhaliza', 'liza@pembeli.com', NULL, '$2y$12$SolTM4v0vwbwhsdD3K81RezuX0hZKFGh5XyecsomFkU7jViMp.DrW', NULL, '2025-09-01 18:23:51', '2025-09-01 18:23:51');
 
 --
 -- Indexes for dumped tables
@@ -461,8 +453,6 @@ ALTER TABLE `permissions`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `products_name_unique` (`name`),
-  ADD UNIQUE KEY `products_slug_unique` (`slug`),
   ADD KEY `products_category_id_foreign` (`category_id`);
 
 --
@@ -553,7 +543,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_transactions`
@@ -577,7 +567,7 @@ ALTER TABLE `transaction_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
