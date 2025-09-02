@@ -12,8 +12,15 @@ class ProductTransactionController extends Controller
      */
     public function index()
     {
+        $user = Auth()->user();
+        if($user->hasRole('buyer')){
+            $product_transactions = $user->product_transactions()->orderBy('id','DESC')->get();
+        }
+        else{
+            $product_transactions = ProductTransaction::orderBy('id','DESC')->get();
+        }
         return view('admin.product_transactions.index', [
-            'transactions' => ProductTransaction::with('user', 'product')->latest()->paginate(10)
+            'product_transactions' => $product_transactions
         ]);
     }
 
