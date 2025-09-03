@@ -32,14 +32,16 @@
                             {{ $productTransaction->created_at->format('d M Y H:i') }}
                         </h3>
                     </div>
-                    <span class="px-3 py-1 rounded-full bg-orange-500">
-                        @if ($productTransaction->is_paid)
+                    @if ($productTransaction->is_paid)
+                        <span class="px-3 py-1 rounded-full bg-green-500">
                             <p class="text-white text-sm">SUCCESS</p>
-                        @else
+                        </span>
+                    @else
+                        <span class="px-3 py-1 rounded-full bg-orange-500">
                             <p class="text-white text-sm">PENDING</p>
-                        @endif
+                        </span>
+                    @endif
 
-                    </span>
                 </div>
                 <hr class="my-3">
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
@@ -145,17 +147,24 @@
                 <hr class="my-3">
                 <div class="flex flex-row items-center gap-x-2">
                     @role('owner')
-                        <form method="POST" action="{{ route('product_transactions.update', 1) }}">
-                            @csrf
-                            @method('PUT')
-                            <button type="button"
-                                class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
-                                Approve Order
-                            </button>
-                        </form>
+                        @if ($productTransaction->is_paid)
+                        <a href="https://wa.me/+62{{ $productTransaction->phone_number }}?text=Halo%20Admin,%20saya%20ingin%20mengetahui%20produk%20yang%20saya%20order%20apakah%20ready%20semua" type="button"
+                            class=" w-fit px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
+                            WhatsApp Customer
+                        </a>
+                        @else
+                            <form method="POST" action="{{ route('product_transactions.update', $productTransaction) }}">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit"
+                                    class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
+                                    Approve Order
+                                </button>
+                            </form>
+                        @endif
                     @endrole
                     @role('buyer')
-                        <a href="#" type="button"
+                        <a href="#" type="submit"
                             class=" w-fit px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
                             Contact Admin
                         </a>

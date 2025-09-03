@@ -65,6 +65,11 @@ class ProductTransactionController extends Controller
     public function update(Request $request, ProductTransaction $productTransaction)
     {
         //
+        // dd($productTransaction);
+        $productTransaction->update([
+            'is_paid'=> true
+        ]);
+        return redirect()->back();
     }
 
     /**
