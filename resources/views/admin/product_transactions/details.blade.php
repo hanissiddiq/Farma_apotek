@@ -20,7 +20,7 @@
                         <div>
                             <p class="text-base text-slate-500">Total Transaksi</p>
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                Rp.18.000.000
+                                {{ 'Rp ' . number_format($productTransaction->total_amount, 0, ',', '.') }}
                             </h3>
                         </div>
                     </div>
@@ -29,11 +29,16 @@
                             Date
                         </p>
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                            02 Agustus 2025
+                            {{ $productTransaction->created_at->format('d M Y H:i') }}
                         </h3>
                     </div>
                     <span class="px-3 py-1 rounded-full bg-orange-500">
-                        <p class="text-white text-sm">PENDING</p>
+                        @if ($productTransaction->is_paid)
+                            <p class="text-white text-sm">SUCCESS</p>
+                        @else
+                            <p class="text-white text-sm">PENDING</p>
+                        @endif
+
                     </span>
                 </div>
                 <hr class="my-3">
@@ -43,86 +48,31 @@
 
                 <div class="grid-cols-4 grid gap-x-10 ">
                     <div class="flex flex-col gap-y-5 col-span-3 ">
-                        {{-- item order --}}
-                        <div class="item-card flex flex-row justify-between items-center">
-                            <div class="flex flex-row items-center gap-x-3">
-                                <img src="https://placehold.co/50x50" alt=""
-                                    class="w-[50px] h-[50px] object-cover">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                        sanmol
-                                    </h3>
-                                    <p class="text-base text-slate-500">
-                                        {{ 'Rp ' . '45000' }}
-                                    </p>
+
+                        @forelse ($productTransaction->transactionDetails as $detail)
+                            {{-- item order --}}
+                            <div class="item-card flex flex-row justify-between items-center">
+                                <div class="flex flex-row items-center gap-x-3">
+                                    <img src="{{ Storage::url($detail->product->photo) }}" alt=""
+                                        class="w-[50px] h-[50px] object-cover">
+                                    {{-- <img src="https://placehold.co/50x50" alt=""
+                                        class="w-[50px] h-[50px] object-cover"> --}}
+                                    <div>
+                                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
+                                            {{ $detail->product->name }}
+                                        </h3>
+                                        <p class="text-base text-slate-500">
+                                            {{ 'Rp ' . number_format($detail->product->price, 0, ',', '.') }}
+                                        </p>
+                                    </div>
                                 </div>
+                                <p class="text-base text-slate-500">{{ $detail->product->category->name }}</p>
                             </div>
-                            <p class="text-base text-slate-500">{{ 'Vitamins' }}</p>
-                        </div>
-                        {{-- item order --}}
-                        <div class="item-card flex flex-row justify-between items-center">
-                            <div class="flex flex-row items-center gap-x-3">
-                                <img src="https://placehold.co/50x50" alt=""
-                                    class="w-[50px] h-[50px] object-cover">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                        sanmol
-                                    </h3>
-                                    <p class="text-base text-slate-500">
-                                        {{ 'Rp ' . '45000' }}
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-base text-slate-500">{{ 'Vitamins' }}</p>
-                        </div>
-                        {{-- item order --}}
-                        <div class="item-card flex flex-row justify-between items-center">
-                            <div class="flex flex-row items-center gap-x-3">
-                                <img src="https://placehold.co/50x50" alt=""
-                                    class="w-[50px] h-[50px] object-cover">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                        sanmol
-                                    </h3>
-                                    <p class="text-base text-slate-500">
-                                        {{ 'Rp ' . '45000' }}
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-base text-slate-500">{{ 'Vitamins' }}</p>
-                        </div>
-                        {{-- item order --}}
-                        <div class="item-card flex flex-row justify-between items-center">
-                            <div class="flex flex-row items-center gap-x-3">
-                                <img src="https://placehold.co/50x50" alt=""
-                                    class="w-[50px] h-[50px] object-cover">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                        sanmol
-                                    </h3>
-                                    <p class="text-base text-slate-500">
-                                        {{ 'Rp ' . '45000' }}
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-base text-slate-500">{{ 'Vitamins' }}</p>
-                        </div>
-                        {{-- item order --}}
-                        <div class="item-card flex flex-row justify-between items-center">
-                            <div class="flex flex-row items-center gap-x-3">
-                                <img src="https://placehold.co/50x50" alt=""
-                                    class="w-[50px] h-[50px] object-cover">
-                                <div>
-                                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
-                                        sanmol
-                                    </h3>
-                                    <p class="text-base text-slate-500">
-                                        {{ 'Rp ' . '45000' }}
-                                    </p>
-                                </div>
-                            </div>
-                            <p class="text-base text-slate-500">{{ 'Vitamins' }}</p>
-                        </div>
+                        @empty
+                            <p class="text-center text-white font-bold text-gray-500">Belum tersedia transaksi terbaru.
+                            </p>
+                        @endforelse
+
                         <hr class="my-3">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
                             Details of Delivery
@@ -134,7 +84,7 @@
                                 {{ 'Address' }}
                             </p>
                             <h3 class="text-xl font-bold text-white">
-                                {{ 'Gampong Pusong Lhokseumawe' }}
+                                {{ $productTransaction->address }}
                             </h3>
                         </div>
                         {{-- item order --}}
@@ -144,7 +94,7 @@
                                 {{ 'City' }}
                             </p>
                             <h3 class="text-xl font-bold text-white">
-                                {{ 'Kota Lhokseumawe' }}
+                                {{ $productTransaction->city }}
                             </h3>
                         </div>
                         {{-- item order --}}
@@ -154,7 +104,7 @@
                                 {{ 'Post Code' }}
                             </p>
                             <h3 class="text-xl font-bold text-white">
-                                {{ '24321' }}
+                                {{ $productTransaction->post_code }}
                             </h3>
                         </div>
                         {{-- item order --}}
@@ -164,7 +114,7 @@
                                 {{ 'Notes' }}
                             </p>
                             <h3 class="text-xl font-bold text-white">
-                                {{ 'Depan Menasah Mesjid Penteut' }}
+                                {{ $productTransaction->notes }}
                             </h3>
                         </div>
                         {{-- item order --}}
@@ -174,7 +124,7 @@
                                 {{ 'Phone Number' }}
                             </p>
                             <h3 class="text-xl font-bold text-white">
-                                {{ '08123456789' }}
+                                {{ $productTransaction->phone_number }}
                             </h3>
                         </div>
 
@@ -186,23 +136,28 @@
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
                             Proof of Payments
                         </h3>
-                        <img src="https://placehold.co/300x400" alt="" class="w-[300px] bg-red-600 h-[400px]">
+                        {{-- <img src="https://placehold.co/300x400" alt="" class="w-[300px] bg-red-600 h-[400px]"> --}}
+                        {{-- <img src="{{ $product_transaction->proof }}" alt="" class="w-[300px] bg-red-600 h-[400px]"> --}}
+                        <img src="{{ Storage::url($productTransaction->proof) }}" alt=""
+                            class="w-[300px] bg-red-600 h-[400px] object-cover">
                     </div>
                 </div>
                 <hr class="my-3">
                 <div class="flex flex-row items-center gap-x-2">
                     @role('owner')
-                        <form method="POST" action="{{ route('product_transactions.update',1) }}">
+                        <form method="POST" action="{{ route('product_transactions.update', 1) }}">
                             @csrf
                             @method('PUT')
-                            <button type="button" class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
+                            <button type="button"
+                                class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
                                 Approve Order
                             </button>
                         </form>
                     @endrole
                     @role('buyer')
-                        <a href="#" type="button" class=" w-fit px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
-                                Contact Admin
+                        <a href="#" type="button"
+                            class=" w-fit px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
+                            Contact Admin
                         </a>
                     @endrole
                 </div>

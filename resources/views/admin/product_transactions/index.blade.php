@@ -41,7 +41,7 @@
                     </span>
                     @endif
                     <div class="flex flex-row items-center gap-x-2">
-                        <a href="#"class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">View Details</a>
+                        <a href="{{ route('product_transactions.show', $transaction) }}"class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">View Details</a>
                     </div>
                 </div>
                 <hr class="my-3">
