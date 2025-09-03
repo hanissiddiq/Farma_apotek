@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 02, 2025 at 01:47 AM
+-- Generation Time: Sep 03, 2025 at 03:23 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.28
 
@@ -191,7 +191,8 @@ CREATE TABLE `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 2);
+(2, 'App\\Models\\User', 2),
+(2, 'App\\Models\\User', 3);
 
 -- --------------------------------------------------------
 
@@ -268,6 +269,14 @@ CREATE TABLE `product_transactions` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `product_transactions`
+--
+
+INSERT INTO `product_transactions` (`id`, `total_amount`, `is_paid`, `address`, `city`, `post_code`, `phone_number`, `notes`, `proof`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 375000, 0, 'Jln. Medan - B. Aceh Penteut, Meunasah Mesjid Penteut.', 'Kota Lhokseumawe', '24373', '083825353620', 'Pas disamping dental care ', 'proof/bukti_bayar.jpg', 2, '2025-09-02 08:25:51', '2025-09-02 08:25:51'),
+(2, 958000, 1, 'Gampong Raya Dagang, Peusangan', 'Bireuen', '24261', '081263132787', 'Lorong depan mesjid gampong raya dagang', 'proof/bukti_bayar_afra.jpg', 3, '2025-09-03 02:08:11', '2025-09-03 02:08:11');
+
 -- --------------------------------------------------------
 
 --
@@ -321,7 +330,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('YWiwFc1fCm5FCNdTYUNp1Znxrk6dUiMQ9ztBkUle', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQWY3dU9SdHJyb1htRGxpcjdSU0FrN0I5dFpKblJnZkFMM0hMeDFVMSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO319', 1756777562);
+('vY3k3bxQoQ8UaGTwf3OjJiS54BXz33TsMpPmN1yG', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOFJtSG5aMG9ZM3VyYlBkNXQ1bkpQQzV6UndnM1VtNk96YXUxQkFZWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0X3RyYW5zYWN0aW9ucyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1756869339),
+('XbWZ4yWXF6W4S1Kj0hSntRd2jABrm2M8QGqSDIKL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTG9zMTB6ZUFPZDBQa3dNN3FTZW9NSXQ2a0kxak02bkR0aG9rUWdsRyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0X3RyYW5zYWN0aW9ucy8xIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1756869348);
 
 -- --------------------------------------------------------
 
@@ -337,6 +347,15 @@ CREATE TABLE `transaction_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transaction_details`
+--
+
+INSERT INTO `transaction_details` (`id`, `product_transaction_id`, `product_id`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, 25000, '2025-09-03 02:36:11', '2025-09-03 02:36:11'),
+(2, 2, 4, 12000, '2025-09-03 02:36:49', '2025-09-03 02:36:49'),
+(3, 1, 5, 32000, '2025-09-03 02:37:23', '2025-09-03 02:37:23');
 
 -- --------------------------------------------------------
 
@@ -361,7 +380,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Hanis', 'hanissiddiq10@gmail.com', NULL, '$2y$12$dzp/hLWpus4tlL2qZE5Wx.9l8gPsI2CzqLf7pzjYC9S8upd7JkSrS', NULL, '2025-08-31 20:29:50', '2025-08-31 20:29:50'),
-(2, 'Nurhaliza', 'liza@pembeli.com', NULL, '$2y$12$SolTM4v0vwbwhsdD3K81RezuX0hZKFGh5XyecsomFkU7jViMp.DrW', NULL, '2025-09-01 18:23:51', '2025-09-01 18:23:51');
+(2, 'Nurhaliza', 'liza@pembeli.com', NULL, '$2y$12$SolTM4v0vwbwhsdD3K81RezuX0hZKFGh5XyecsomFkU7jViMp.DrW', NULL, '2025-09-01 18:23:51', '2025-09-01 18:23:51'),
+(3, 'Afradiana', 'afradiana@pembeli.com', NULL, '$2y$12$cXlSXgJY3rAl4LgFTxaZcufiRkIn3eYVhL1Xo.bdI8zDQ3w9sebqW', NULL, '2025-09-02 19:32:18', '2025-09-02 19:32:18');
 
 --
 -- Indexes for dumped tables
@@ -549,7 +569,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_transactions`
 --
 ALTER TABLE `product_transactions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -561,13 +581,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `transaction_details`
 --
 ALTER TABLE `transaction_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

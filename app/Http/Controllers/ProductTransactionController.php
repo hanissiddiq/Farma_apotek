@@ -12,7 +12,16 @@ class ProductTransactionController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth()->user();
+        if($user->hasRole('buyer')){
+            $product_transactions = $user->product_transactions()->orderBy('id','DESC')->get();
+        }
+        else{
+            $product_transactions = ProductTransaction::orderBy('id','DESC')->get();
+        }
+        return view('admin.product_transactions.index', [
+            'product_transactions' => $product_transactions
+        ]);
     }
 
     /**
@@ -36,7 +45,10 @@ class ProductTransactionController extends Controller
      */
     public function show(ProductTransaction $productTransaction)
     {
-        //
+        $productTransaction = ProductTransaction::with('transactionDetails.product')->find($productTransaction->id);
+        return view('admin.product_transactions.details',[
+            'productTransaction' => $productTransaction
+        ]);
     }
 
     /**
@@ -53,6 +65,11 @@ class ProductTransactionController extends Controller
     public function update(Request $request, ProductTransaction $productTransaction)
     {
         //
+        // dd($productTransaction);
+        $productTransaction->update([
+            'is_paid'=> true
+        ]);
+        return redirect()->back();
     }
 
     /**
