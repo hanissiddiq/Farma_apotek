@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductTransactionController;
+use App\Http\Controllers\FrontController;
 use App\Models\ProductTransaction;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -12,9 +13,12 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/search',[FrontController::class, 'search'])->name('front.search');
+Route::get('/details/{product:slug}',[FrontController::class, 'details'])->name('front.product.details');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
