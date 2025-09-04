@@ -84,16 +84,16 @@
 				Best Medicines
 			</p>
 			<form action="" method="POST" id="searchForm" class="w-full">
-				<input type="text" name="search" id="searchProduct"
-					class="block w-full py-3.5 pl-4 pr-10 rounded-[50px] font-semibold placeholder:text-grey placeholder:font-normal text-black text-base bg-no-repeat bg-[calc(100%-16px)] bg-[url('{{asset('assets/svgs/ic-search.svg')}}')] focus:ring-2 focus:ring-primary focus:outline-none focus:border-none transition-all"
+				<input type="text" name="search" id="searchProduct" style="background-image: url('{{asset('assets/svgs/ic-search.svg')}}');"
+					class="block w-full py-3.5 pl-4 pr-10 rounded-[50px] font-semibold placeholder:text-grey placeholder:font-normal text-black text-base bg-no-repeat bg-[calc(100%-16px)]  focus:ring-2 focus:ring-primary focus:outline-none focus:border-none transition-all"
 					placeholder="Search by product name">
 			</form>
 		</section>
 
 		<!-- Your last order -->
 		<section class="wrapper">
-			<div
-				class="flex justify-between gap-5 items-center bg-lilac py-3.5 px-4 rounded-2xl relative bg-left bg-no-repeat bg-cover bg-[url('{{asset('assets/svgs/pipeline.svg')}}')]">
+			<div style="background-image: url('{{asset('assets/svgs/pipeline.svg')}}')"
+				class="flex justify-between gap-5 items-center bg-lilac py-3.5 px-4 rounded-2xl relative bg-left bg-no-repeat bg-cover ">
 				<p class="text-base font-bold">
 					Your last order has <br>
 					been proceed
@@ -186,8 +186,8 @@
 
 		<!-- Explore -->
 		<section class="wrapper">
-			<div
-				class="bg-lilac py-3.5 px-5 rounded-2xl relative bg-right-bottom bg-no-repeat bg-[url('{{ asset("assets/svgs/doctor-help.svg") }}')] bg-auto">
+			<div style="background-image: url('{{asset('assets/svgs/doctor-help.svg')}}')"
+				class="bg-lilac py-3.5 px-5 rounded-2xl relative bg-right-bottom bg-no-repeat bg-auto">
 				<img src="{{asset('assets/svgs/cloud.svg')}}" class="-ml-1.5 mb-1.5" alt="">
 				<div class="flex flex-col gap-4 mb-[23px]">
 					<p class="text-base font-bold">
