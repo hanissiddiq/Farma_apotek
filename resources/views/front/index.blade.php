@@ -145,42 +145,25 @@
 				Latest Products
 			</p>
 			<div id="proudctsSlider" class="relative">
+                @forelse ($products as $product)
+
 				<!-- Panadomal -->
 				<div class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-					<img src="{{asset('assets/images/product-1.webp')}}" class="h-[100px] w-full object-contain" alt="">
+					<img src="{{Storage::url($product->photo)}}" class="h-[100px] w-full object-contain " alt="">
 					<div>
-						<a href="details.html" class="text-base font-semibold w-[120px] truncate stretched-link block">
-							Panadomal
+						<a href="{{ route('front.product.details', $product->slug) }}" class="text-base font-semibold w-[120px] truncate stretched-link block">
+							{{$product->name}}
 						</a>
 						<p class="text-sm truncate text-grey">
-							Rp 56000
+							{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}
 						</p>
 					</div>
 				</div>
-				<!-- Softovac Rami -->
-				<div class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-					<img src="{{asset('assets/images/product-4.webp')}}" class="h-[100px] w-full object-contain" alt="">
-					<div>
-						<a href="details.html" class="text-base font-semibold w-[120px] truncate stretched-link block">
-							Softovac Rami
-						</a>
-						<p class="text-sm truncate text-grey">
-							Rp 290000
-						</p>
-					</div>
-				</div>
-				<!-- Softovac Rami -->
-				<div class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-					<img src="{{asset('assets/images/product-2.webp')}}" class="h-[100px] w-full object-contain" alt="">
-					<div>
-						<a href="details.html" class="text-base font-semibold w-[120px] truncate stretched-link block">
-							Softovac Rami
-						</a>
-						<p class="text-sm truncate text-grey">
-							Rp 290000
-						</p>
-					</div>
-				</div>
+
+                @empty
+                    <p>No products found.</p>
+                @endforelse
+
 			</div>
 		</section>
 
