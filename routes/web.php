@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductTransactionController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
 use App\Models\ProductTransaction;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('carts', CartController::class)->middleware('role:buyer');
+    Route::post('carts/add/{productId}', [CartController::class, 'store'])->name('carts.store')->middleware('role:buyer');
 
     Route::resource('product_transactions', ProductTransactionController::class)->middleware('role:owner|owner|buyer');
 
