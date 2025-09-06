@@ -12,6 +12,17 @@ class FrontController extends Controller
     {
         $products = Product::with('category')->orderBy('id','DESC')->take(6)->get();
         $category = Category::all(); // Fetch or define your products here
-        return view('front.index');
+        return view('front.index',[
+            'products' => $products,
+            'categories' => $category
+        ]);
+    }
+
+    public function details(Product $product)
+    {
+        // dd($product);
+        return view('front.details',[
+            'product' => $product
+        ]);
     }
 }

@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Landing Page | Parma</title>
+		<title>Home Page | Parma</title>
 		<link rel="shortcut icon" href="{{asset('assets/svgs/logo-mark.svg')}}" type="image/x-icon">
 		<link rel="stylesheet" href="{{asset('css/main.css')}}">
 		<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -103,39 +103,25 @@
 		</section>
 
 		<!-- Categories -->
+
 		<section class="wrapper !px-0 flex flex-col gap-2.5">
 			<p class="px-4 text-base font-bold">
 				Categories
 			</p>
 			<div id="categoriesSlider" class="relative">
+                @forelse ($categories as $category)
+
+
 				<!-- Diabetes -->
 				<div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
-					<img src="{{asset('assets/svgs/ic-diabetes-filled.svg')}}" class="size-10" alt="">
+					<img src="{{Storage::url($category->icon)}}" class="size-10" alt="">
 					<a href="#" class="text-base font-semibold truncate stretched-link">
-						Diabetes
+						{{$category->name}}
 					</a>
 				</div>
-				<!-- Fitness -->
-				<div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
-					<img src="{{asset('assets/svgs/ic-fitness-filled.svg')}}" class="size-10" alt="">
-					<a href="#" class="text-base font-semibold truncate stretched-link">
-						Fitness
-					</a>
-				</div>
-				<!-- Vitamins -->
-				<div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
-					<img src="{{asset('assets/svgs/ic-vitamins-filled.svg')}}" class="size-10" alt="">
-					<a href="#" class="text-base font-semibold truncate stretched-link">
-						Vitamins
-					</a>
-				</div>
-				<!-- Surgicals -->
-				<div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
-					<img src="{{asset('assets/svgs/ic-surgicals-filled.svg')}}" class="size-10" alt="">
-					<a href="#" class="text-base font-semibold truncate stretched-link">
-						Surgicals
-					</a>
-				</div>
+                @empty
+                    <p>No categories found.</p>
+                @endforelse
 			</div>
 		</section>
 
@@ -145,42 +131,25 @@
 				Latest Products
 			</p>
 			<div id="proudctsSlider" class="relative">
+                @forelse ($products as $product)
+
 				<!-- Panadomal -->
 				<div class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-					<img src="{{asset('assets/images/product-1.webp')}}" class="h-[100px] w-full object-contain" alt="">
+					<img src="{{Storage::url($product->photo)}}" class="h-[100px] w-full object-contain " alt="">
 					<div>
-						<a href="details.html" class="text-base font-semibold w-[120px] truncate stretched-link block">
-							Panadomal
+						<a href="{{ route('front.product.details', $product->slug) }}" class="text-base font-semibold w-[120px] truncate stretched-link block">
+							{{$product->name}}
 						</a>
 						<p class="text-sm truncate text-grey">
-							Rp 56000
+							{{ 'Rp ' . number_format($product->price, 0, ',', '.') }}
 						</p>
 					</div>
 				</div>
-				<!-- Softovac Rami -->
-				<div class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-					<img src="{{asset('assets/images/product-4.webp')}}" class="h-[100px] w-full object-contain" alt="">
-					<div>
-						<a href="details.html" class="text-base font-semibold w-[120px] truncate stretched-link block">
-							Softovac Rami
-						</a>
-						<p class="text-sm truncate text-grey">
-							Rp 290000
-						</p>
-					</div>
-				</div>
-				<!-- Softovac Rami -->
-				<div class="rounded-2xl bg-white py-3.5 pl-4 pr-[22px] inline-flex flex-col gap-4 items-start mr-4 relative w-[158px]">
-					<img src="{{asset('assets/images/product-2.webp')}}" class="h-[100px] w-full object-contain" alt="">
-					<div>
-						<a href="details.html" class="text-base font-semibold w-[120px] truncate stretched-link block">
-							Softovac Rami
-						</a>
-						<p class="text-sm truncate text-grey">
-							Rp 290000
-						</p>
-					</div>
-				</div>
+
+                @empty
+                    <p>No products found.</p>
+                @endforelse
+
 			</div>
 		</section>
 
