@@ -91,6 +91,19 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        try {
+            // Hapus file ikon jika ada
+
+
+            $cart->delete();
+
+            return redirect()->route('carts.index')->with('success', 'Cart item deleted successfully.');
+        } catch (\Exception $e) {
+           DB::rollBack();
+            $error = ValidationException::withMessages([
+                'system_error' => ['System Error!',$e->getMessage()],
+            ]);
+            throw $error;
+        }
     }
 }

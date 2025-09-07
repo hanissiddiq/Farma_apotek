@@ -41,21 +41,27 @@
               alt="">
             <div class="flex flex-wrap items-center justify-between w-full gap-1">
               <div class="flex flex-col gap-1">
-                <a href="details.html"
-                  class="text-base font-semibold stretched-link whitespace-nowrap w-[150px] truncate">
+                <h3
+                  class="text-base font-semibold whitespace-nowrap w-[150px] truncate">
                   {{ $cart->product->name }}
-                </a>
-                <p class="text-sm text-grey">
+                </h3>
+                <p class="text-sm text-grey product-price" data-price="{{ $cart->product->price }}">
                   Rp {{ number_format($cart->product->price, 0, ',', '.') }}
                 </p>
               </div>
-              <button type="button">
+               <form action="{{ route('carts.destroy', $cart) }}" method="POST">
+                @csrf
+                @method('DELETE')
+              <button type="submit">
                 <img src="{{asset('assets/svgs/ic-trash-can-filled.svg')}}" class="size-[30px]" alt="">
               </button>
+                </form>
             </div>
           </div>
         @empty
+         <div class="py-3.5 pl-4 pr-[22px] bg-white rounded-2xl flex gap-1 items-center relative">
           <p>Belum ada produk di keranjang</p>
+         </div>
         @endforelse
 
       </div>
@@ -77,40 +83,40 @@
             <p class="text-base font-semibold first:font-normal">
               Sub Total
             </p>
-            <p class="text-base font-semibold first:font-normal">
-              Rp 890.000
+            <p class="text-base font-semibold first:font-normal" id="checkout-sub-total">
+
             </p>
           </li>
           <li class="flex items-center justify-between">
             <p class="text-base font-semibold first:font-normal">
               PPN 11%
             </p>
-            <p class="text-base font-semibold first:font-normal">
-              Rp 89.000
+            <p class="text-base font-semibold first:font-normal" id="checkout-ppn">
+
             </p>
           </li>
           <li class="flex items-center justify-between">
             <p class="text-base font-semibold first:font-normal">
               Insurance 23%
             </p>
-            <p class="text-base font-semibold first:font-normal">
-              Rp 120.000
+            <p class="text-base font-semibold first:font-normal" id="checkout-insurance">
+
             </p>
           </li>
           <li class="flex items-center justify-between">
             <p class="text-base font-semibold first:font-normal">
-              Delivery (Promo)
+              Delivery Fee
             </p>
-            <p class="text-base font-semibold first:font-normal">
-              Rp 10.000
+            <p class="text-base font-semibold first:font-normal" id="checkout-delivery-fee">
+
             </p>
           </li>
           <li class="flex items-center justify-between">
             <p class="text-base font-bold first:font-normal">
               Grand Total
             </p>
-            <p class="text-base font-bold first:font-normal text-primary">
-              Rp 3.290.000
+            <p class="text-base font-bold first:font-normal text-primary" id="checkout-grand-total">
+
             </p>
           </li>
         </ul>
@@ -230,6 +236,7 @@
             Rp 253.000
           </p>
         </div>
+
         <button type="button" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white rounded-full w-max bg-primary whitespace-nowrap" onclick="window.location.href='{{asset('pages/success-checkout.html')}}'">
           Confirm
         </button>
@@ -239,6 +246,24 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="{{asset('scripts/global.js')}}"></script>
+    <script>
+        function calculatePrice(){
+            let subTotal =0;
+            let deliveryFee = 5000;
+
+            document.querySelectorAll('.product-price').forEach(item=>{
+                subTotal += parseFloat(item.getAttribute('data-price'));
+            });
+
+            document.getElementById('checkout-delivery-fee').textContent = `Rp `+ deliveryFee.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('checkout-sub-total').textContent = `Rp `+ subTotal.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            calculatePrice();
+        });
+    </script>
   </body>
 
 </html>
