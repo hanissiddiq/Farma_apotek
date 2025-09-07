@@ -232,7 +232,7 @@
           <p class="text-sm text-grey mb-0.5">
             Grand Total
           </p>
-          <p class="text-lg min-[350px]:text-2xl font-bold text-white">
+          <p class="text-lg min-[350px]:text-2xl font-bold text-white" id="checkout-grand-total-price">
             Rp 253.000
           </p>
         </div>
@@ -257,6 +257,15 @@
 
             document.getElementById('checkout-delivery-fee').textContent = `Rp `+ deliveryFee.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             document.getElementById('checkout-sub-total').textContent = `Rp `+ subTotal.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            const tax = 11 * subTotal /100;
+            document.getElementById('checkout-ppn').textContent = `Rp `+ tax.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const insurance = 23 * subTotal /100;
+            document.getElementById('checkout-insurance').textContent = `Rp `+ insurance.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+            const grandTotalPrice = subTotal + tax + insurance + deliveryFee;
+            document.getElementById('checkout-grand-total').textContent = `Rp `+ grandTotalPrice.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            document.getElementById('checkout-grand-total-price').textContent = `Rp `+ grandTotalPrice.toLocaleString('id-ID', {minimumFractionDigits: 0, maximumFractionDigits: 2});
 
         }
 
