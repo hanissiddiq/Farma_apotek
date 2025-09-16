@@ -34,8 +34,8 @@ Aplikasi **Apotek Online** adalah sistem manajemen penjualan obat dan administra
 Ikuti langkah-langkah berikut untuk menjalankan proyek secara lokal:
 
 ```bash
-git clone https://github.com/hanissiddiq/apotek-online.git
-cd apotek-online
+git clone https://github.com/hanissiddiq/Farma_apotek.git
+cd Farma
 
 # Install dependency PHP
 composer install
@@ -64,6 +64,10 @@ php artisan serve
 # Account Owner
 email : hanissiddiq10@gmail.com
 Password : password
+
+#Account Pembeli
+email : liza@pembeli.com
+Password : pembeli123
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
