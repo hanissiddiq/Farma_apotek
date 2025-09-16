@@ -127,7 +127,7 @@
                 <!-- Diabetes -->
                 <div class="inline-flex gap-2.5 items-center py-3 px-3.5 relative bg-white rounded-xl mr-4">
                     <img src="{{ Storage::url($category->icon) }}" class="size-10" alt="">
-                    <a href="#" class="text-base font-semibold truncate stretched-link">
+                    <a href="{{ route('front.product.category', $category) }}" class="text-base font-semibold truncate stretched-link">
                         {{ $category->name }}
                     </a>
                 </div>

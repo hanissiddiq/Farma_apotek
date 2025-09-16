@@ -22,6 +22,7 @@ Route::get('/', [FrontController::class, 'index'])->name('front.index');
 //search route
 Route::get('/search',[FrontController::class, 'search'])->name('front.search');
 Route::get('/details/{product:slug}',[FrontController::class, 'details'])->name('front.product.details');
+Route::get('/category/{category}',[FrontController::class, 'category'])->name('front.product.category');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
