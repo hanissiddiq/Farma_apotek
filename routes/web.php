@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
+
+//search route
 Route::get('/search',[FrontController::class, 'search'])->name('front.search');
 Route::get('/details/{product:slug}',[FrontController::class, 'details'])->name('front.product.details');
 
