@@ -14,7 +14,7 @@
 
                 {{-- @forelse ($products as $product ) --}}
 
-                <div class="item card flex flex-row justify-between items-center">
+                <div class="item card flex gap-y-3 flex-col md:flex-row justify-between md:items-center">
                     <div class="flex flex-row items-center gap-x-3">
                         {{-- <img src="#" alt="" class="w-[50px] h-[50px] object-cover"> --}}
                         <div>
@@ -33,11 +33,11 @@
                         </h3>
                     </div>
                     @if ($productTransaction->is_paid)
-                        <span class="px-3 py-1 rounded-full bg-green-500">
+                        <span class="px-3 py-1 w-fit rounded-full bg-green-500">
                             <p class="text-white text-sm">SUCCESS</p>
                         </span>
                     @else
-                        <span class="px-3 py-1 rounded-full bg-orange-500">
+                        <span class="px-3 py-1 w-fit rounded-full bg-orange-500">
                             <p class="text-white text-sm">PENDING</p>
                         </span>
                     @endif
@@ -48,7 +48,7 @@
                     List of items
                 </h3>
 
-                <div class="grid-cols-4 grid gap-x-10 ">
+                <div class="grid-cols-1 md:grid-cols-4 grid gap-x-10 ">
                     <div class="flex flex-col gap-y-5 col-span-3 ">
 
                         @forelse ($productTransaction->transactionDetails as $detail)
@@ -110,7 +110,7 @@
                             </h3>
                         </div>
                         {{-- item order --}}
-                        <div class="item-card flex flex-row justify-between items-center">
+                        <div class="item-card flex flex-col justify-between items-start md:items-center md:flex-row">
                             {{-- items of delivery --}}
                             <p class="text-base text-slate-500">
                                 {{ 'Notes' }}
@@ -134,24 +134,30 @@
                     </div>
                     {{-- </div> --}}
                     {{-- Side detail order --}}
-                    <div class="flex flex-col gap-y-5 col-span-1 items-end">
+                    <div class="flex flex-col gap-y-5  items-start">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white">
                             Proof of Payments
                         </h3>
-                        {{-- <img src="https://placehold.co/300x400" alt="" class="w-[300px] bg-red-600 h-[400px]"> --}}
-                        {{-- <img src="{{ $product_transaction->proof }}" alt="" class="w-[300px] bg-red-600 h-[400px]"> --}}
-                        <img src="{{ Storage::url($productTransaction->proof) }}" alt=""
-                            class="w-[300px] bg-red-600 h-[400px] object-cover">
+                        <div class="flex flex-col row-span-2 justify-center items-center">
+                            <div></div>
+                            {{-- <img src="https://placehold.co/300x400" alt="" class="w-[300px] bg-red-600 h-[400px]"> --}}
+                            {{-- <img src="{{ $product_transaction->proof }}" alt="" class="w-[300px] bg-red-600 h-[400px]"> --}}
+                            <img src="{{ Storage::url($productTransaction->proof) }}" alt=""
+                                class="w-full object-cover">
+                        </div>
                     </div>
+                    {{-- <img class="hidden md:block" src="{{ Storage::url($productTransaction->proof) }}" alt=""
+                            class="w-[300px] bg-red-600 h-[400px] object-cover"> --}}
                 </div>
                 <hr class="my-3">
                 <div class="flex flex-row items-center gap-x-2">
                     @role('owner')
                         @if ($productTransaction->is_paid)
-                        <a href="https://wa.me/+62{{ $productTransaction->phone_number }}?text=Halo%20Admin,%20saya%20ingin%20mengetahui%20produk%20yang%20saya%20order%20apakah%20ready%20semua" type="button"
-                            class=" w-fit px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
-                            WhatsApp Customer
-                        </a>
+                            <a href="https://wa.me/+62{{ $productTransaction->phone_number }}?text=Halo%20Admin,%20saya%20ingin%20mengetahui%20produk%20yang%20saya%20order%20apakah%20ready%20semua"
+                                type="button"
+                                class=" w-fit px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">
+                                WhatsApp Customer
+                            </a>
                         @else
                             <form method="POST" action="{{ route('product_transactions.update', $productTransaction) }}">
                                 @csrf

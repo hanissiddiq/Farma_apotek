@@ -19,7 +19,7 @@
             </div>
             <div class="">
                 <p class="text-base font-semibold capitalize text-primary">
-                    {{ Auth::check() ? Auth::user()->name : 'Afradiana' }}
+                    {{ Auth::check() ? Auth::user()->name : 'Anonymous' }}
                 </p>
                 <p class="text-sm">
                     @if (Auth::check())
@@ -78,7 +78,7 @@
                     Orders
                 </p>
             </a>
-            <a href="{{ route('profile.edit') }}" class="flex flex-col items-center justify-center gap-1 px-1 group">
+            <a href="{{ route('dashboard') }}" class="flex flex-col items-center justify-center gap-1 px-1 group">
                 <img src="{{ asset('assets/svgs/ic-profile.svg') }}"
                     class="filter-to-grey group-[.is-active]:filter-to-primary" alt="">
                 <p
