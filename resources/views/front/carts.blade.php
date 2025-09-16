@@ -156,13 +156,13 @@
           <div class="inline-flex items-center gap-2.5">
             <img src="{{asset('assets/svgs/ic-bank.svg')}}" class="size-5" alt="">
             <p class="text-base font-semibold">
-              Send Payment to
+              Blue BCA
             </p>
           </div>
           <div class="inline-flex items-center gap-2.5">
             <img src="{{asset('assets/svgs/ic-security-card.svg')}}" class="size-5" alt="">
             <p class="text-base font-semibold">
-              083902093092
+              0025 2314 3431
             </p>
           </div>
         </div>
@@ -179,7 +179,8 @@
           <img src="{{asset('assets/svgs/ic-chevron.svg')}}" class="transition-all duration-300 -rotate-180 size-5" alt="">
         </button>
       </div>
-      <form action="" method="" class="p-6 bg-white rounded-3xl" id="deliveryForm">
+      <form enctype="multipart/form-data" action="{{ route('product_transactions.store') }}" method="POST" class="p-6 bg-white rounded-3xl" id="deliveryForm">
+        @csrf
         <div class="flex flex-col gap-5">
           <!-- Address -->
           <div class="flex flex-col gap-2.5">
@@ -195,14 +196,14 @@
           </div>
           <!-- Post Code -->
           <div class="flex flex-col gap-2.5">
-            <label for="postcode" class="text-base font-semibold">Post Code</label>
-            <input type="number" name="postcode" id="postcode__"
+            <label for="post_code" class="text-base font-semibold">Post Code</label>
+            <input type="number" name="post_code" id="post_code__"
               class="form-input bg-[url('{{asset('assets/svgs/ic-house.svg')}}')]" value="22081882">
           </div>
           <!-- Phone Number -->
           <div class="flex flex-col gap-2.5">
-            <label for="phonenumber" class="text-base font-semibold">Phone Number</label>
-            <input type="number" name="phonenumber" id="phonenumber__"
+            <label for="phone_number" class="text-base font-semibold">Phone Number</label>
+            <input type="number" name="phone_number" id="phone_number__"
               class="form-input bg-[url('{{asset('assets/svgs/ic-phone.svg')}}')]" value="602192301923">
           </div>
           <!-- Add. Notes -->
@@ -216,13 +217,13 @@
           </div>
           <!-- Proof of Payment -->
           <div class="flex flex-col gap-2.5">
-            <label for="proof_of_payment" class="text-base font-semibold">Proof of Payment</label>
-            <input type="file" name="proof_of_payment" id="proof_of_payment__"
+            <label for="proof" class="text-base font-semibold">Proof of Payment</label>
+            <input type="file" name="proof" id="proof__"
               class="form-input bg-[url('{{asset('assets/svgs/ic-folder-add.svg')}}')]">
           </div>
         </div>
         </div>
-      </form>
+
     </section>
 
     <!-- Floating grand total -->
@@ -237,11 +238,12 @@
           </p>
         </div>
 
-        <button type="button" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white rounded-full w-max bg-primary whitespace-nowrap" onclick="window.location.href='{{asset('pages/success-checkout.html')}}'">
+        <button type="submit" class="inline-flex items-center justify-center px-5 py-3 text-base font-bold text-white rounded-full w-max bg-primary whitespace-nowrap">
           Confirm
         </button>
       </section>
     </div>
+    </form>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

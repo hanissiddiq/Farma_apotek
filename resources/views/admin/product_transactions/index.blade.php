@@ -14,6 +14,7 @@
 
                 @forelse ($product_transactions as $transaction )
                 <div class="item card flex flex-row justify-between items-center">
+                    <a href="{{ route('product_transactions.show', $transaction) }}">
                     <div class="flex flex-row items-center gap-x-3">
                         {{-- <img src="#" alt="" class="w-[50px] h-[50px] object-cover"> --}}
                         <div>
@@ -23,7 +24,8 @@
                             </h3>
                         </div>
                     </div>
-                    <div>
+                </a>
+                    <div class="hidden md:flex flex-col">
                         <p class="text-base text-slate-500">
                             Date
                         </p>
@@ -40,10 +42,11 @@
                         <p class="text-white text-sm">PENDING</p>
                     </span>
                     @endif
-                    <div class="flex flex-row items-center gap-x-2">
+                    <div class="hidden md:flex flex-row items-center gap-x-2">
                         <a href="{{ route('product_transactions.show', $transaction) }}"class="px-5 py-3 rounded-full text-white bg-indigo-500 hover:bg-indigo-600">View Details</a>
                     </div>
                 </div>
+
                 <hr class="my-3">
                 @empty
                     <p class="text-center text-white font-bold text-gray-500">Belum tersedia transaksi terbaru.</p>
